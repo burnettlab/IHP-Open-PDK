@@ -176,6 +176,8 @@ unit_tests_*
 lvs_run_*
 *_extracted.cir
 cells_tests_*
+.ihp_rc
+.spiceinit
 
 # KLayout LVS options
 lvs_options.yml
