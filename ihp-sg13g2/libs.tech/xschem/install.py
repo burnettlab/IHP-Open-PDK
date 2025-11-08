@@ -84,7 +84,7 @@ if __name__ == "__main__":
     	
 
     original_file =  pdk_root + "/ihp-sg13g2/libs.tech/ngspice/.spiceinit"
-    symbolic_link = "/home/" + username + "/.spiceinit"
+    symbolic_link = os.path.expandvars("$HOME") + "/.spiceinit"
     # Create the symbolic link
     if not os.path.exists(symbolic_link):
         try:
