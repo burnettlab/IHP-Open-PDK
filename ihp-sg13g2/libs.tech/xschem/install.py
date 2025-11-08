@@ -58,6 +58,8 @@ if __name__ == "__main__":
         openvaf_exe = './' + os.path.realpath(sys.argv[1])
     except IndexError:
         openvaf_exe = "openvaf"
+
+    print(f"{openvaf_exe=}")
     
     pdk_root = os.environ.get("PDK_ROOT")
     if not pdk_root:
