@@ -53,7 +53,7 @@ def info():
 if __name__ == "__main__":
     # Example usage:
     info()
-    
+
     try:
         openvaf_exe = './' + os.path.realpath(sys.argv[1])
     except IndexError:
@@ -75,19 +75,18 @@ if __name__ == "__main__":
     if not os.path.exists(destination_directory):
         os.makedirs(destination_directory)
     
-    program_name = "openvaf"
-    if is_program_installed(program_name):
+    if is_program_installed(openvaf_exe):
         command = f"{openvaf_exe} psp103_nqs.va --output {destination_directory} /psp103_nqs.osdi"    
-        print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
+        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/psp103")
         command = f"{openvaf_exe} r3_cmc.va --output {destination_directory} /r3_cmc.osdi"    
-        print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
+        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/r3_cmc")
         command = f"{openvaf_exe} mosvar.va --output {destination_directory} /mosvar.osdi"    
-        print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
+        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/mosvar")
     else:
-        print(f"{program_name} is not installed.")
+        print("openvaf is not installed.")
     	
 
     original_file =  pdk_root + "/ihp-sg13g2/libs.tech/ngspice/.spiceinit"
