@@ -77,8 +77,8 @@ if __name__ == "__main__":
         os.makedirs(destination_directory)
     
     if is_program_installed(openvaf_exe):
-        for va, source_dir in [('psp103_nqs.va', 'psp103'), ('r3_cmc.va', 'r3_cmc'), ('mosvar.va', 'mosvar')]:
-            command = f"{openvaf_exe} {source_directory}/{source_dir}/{va} --output {destination_directory}/{va}.osdi"    
+        for va, source_dir in [('psp103_nqs', 'psp103'), ('r3_cmc', 'r3_cmc'), ('mosvar', 'mosvar')]:
+            command = f"{openvaf_exe} {source_directory}/{source_dir}/{va}.va --output {destination_directory}/{va}.osdi"    
             print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory}/{source_dir}")	
             try:
                 subprocess.run(command, shell=True, check=True)
