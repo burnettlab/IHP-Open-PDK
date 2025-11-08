@@ -59,7 +59,7 @@ if __name__ == "__main__":
     except IndexError:
         openvaf_exe = "openvaf"
 
-    print(f"{openvaf_exe=}")
+    print(openvaf_exe)
     
     pdk_root = os.environ.get("PDK_ROOT")
     if not pdk_root:
