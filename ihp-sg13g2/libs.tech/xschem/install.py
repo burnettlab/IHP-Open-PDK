@@ -63,12 +63,11 @@ if __name__ == "__main__":
     
     pdk_root = os.environ.get("PDK_ROOT")
     if not pdk_root:
-        print("setup PDK_ROOT environmental variable to IHP-Open-PDK location")
-    else:
-        source_directory=pdk_root + "/ihp-sg13g2/libs.tech/verilog-a"
+        raise EnvironmentError("setup PDK_ROOT environmental variable to IHP-Open-PDK location")
+    source_directory = os.path.realpath(pdk_root + "/ihp-sg13g2/libs.tech/verilog-a")
 
     username = os.environ.get("USER")
-    destination_directory = pdk_root + "/ihp-sg13g2/libs.tech/ngspice/osdi"
+    destination_directory = os.path.realpath(pdk_root + "/ihp-sg13g2/libs.tech/ngspice/osdi")
     
     # Check if the source directory exists
     if not os.path.exists(source_directory):
@@ -78,15 +77,13 @@ if __name__ == "__main__":
         os.makedirs(destination_directory)
     
     if is_program_installed(openvaf_exe):
-        command = f"{openvaf_exe} psp103_nqs.va --output {destination_directory} /psp103_nqs.osdi"    
-        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
-        exec_app_in_directory(command, source_directory + "/psp103")
-        command = f"{openvaf_exe} r3_cmc.va --output {destination_directory} /r3_cmc.osdi"    
-        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
-        exec_app_in_directory(command, source_directory + "/r3_cmc")
-        command = f"{openvaf_exe} mosvar.va --output {destination_directory} /mosvar.osdi"    
-        print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory} ")	
-        exec_app_in_directory(command, source_directory + "/mosvar")
+        for va, source_dir in [('psp103_nqs.va', 'psp103'), ('r3_cmc.va', 'r3_cmc'), ('mosvar.va', 'mosvar')]:
+            command = f"{openvaf_exe} {source_directory}/{source_dir}/{va} --output {destination_directory}/{va}.osdi"    
+            print(f"openvaf is installed and about to run the command '{command}' in a location: {source_directory}/{source_dir}")	
+            try:
+                subprocess.run(command, shell=True, check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Error executing command in directory {source_directory}/{source_dir}: {e}")
     else:
         print("openvaf is not installed.")
     	
