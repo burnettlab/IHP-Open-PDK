@@ -55,7 +55,7 @@ if __name__ == "__main__":
     info()
 
     try:
-        openvaf_exe = './' + os.path.realpath(sys.argv[1])
+        openvaf_exe = os.path.realpath(sys.argv[1])
     except IndexError:
         openvaf_exe = "openvaf"
 
