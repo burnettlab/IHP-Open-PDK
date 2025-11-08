@@ -19,6 +19,7 @@
 ########################################################################
 
 
+import sys
 import shutil
 import os
 import subprocess
@@ -52,6 +53,12 @@ def info():
 if __name__ == "__main__":
     # Example usage:
     info()
+    
+    try:
+        openvaf_exe = './' + os.path.realpath(sys.argv[1])
+    except IndexError:
+        openvaf_exe = "openvaf"
+    
     pdk_root = os.environ.get("PDK_ROOT")
     if not pdk_root:
         print("setup PDK_ROOT environmental variable to IHP-Open-PDK location")
@@ -70,13 +77,13 @@ if __name__ == "__main__":
     
     program_name = "openvaf"
     if is_program_installed(program_name):
-        command = "openvaf psp103_nqs.va --output " + destination_directory + "/psp103_nqs.osdi"    
+        command = f"{openvaf_exe} psp103_nqs.va --output {destination_directory} /psp103_nqs.osdi"    
         print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/psp103")
-        command = "openvaf r3_cmc.va --output " + destination_directory + "/r3_cmc.osdi"    
+        command = f"{openvaf_exe} r3_cmc.va --output {destination_directory} /r3_cmc.osdi"    
         print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/r3_cmc")
-        command = "openvaf mosvar.va --output " + destination_directory + "/mosvar.osdi"    
+        command = f"{openvaf_exe} mosvar.va --output {destination_directory} /mosvar.osdi"    
         print(f"{program_name} is installed and about to run the command '{command}' in a location: {source_directory} ")	
         exec_app_in_directory(command, source_directory + "/mosvar")
     else:
