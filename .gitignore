@@ -177,6 +177,7 @@ lvs_run_*
 *_extracted.cir
 cells_tests_*
 .ihp_rc
+*.pkl
 
 # KLayout LVS options
 lvs_options.yml
