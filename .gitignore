@@ -178,6 +178,9 @@ lvs_run_*
 cells_tests_*
 .ihp_rc
 *.pkl
+*.mat
+*.h5
+*.hdf5
 
 # KLayout LVS options
 lvs_options.yml
